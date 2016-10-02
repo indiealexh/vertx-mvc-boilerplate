@@ -2,3 +2,5 @@
 .vertx/
 target/
 *.iml
+# Our configuration file copied from config.json.example
+src/main/conf/config.json

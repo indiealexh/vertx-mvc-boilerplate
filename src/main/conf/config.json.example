@@ -1,0 +1,14 @@
+{
+    "database": {
+        "default": {
+            "host": "localhost",
+            "port": 3306,
+            "maxPoolSize": 10,
+            "username": "root",
+            "password": "",
+            "database": "vertx",
+            "charset": "UTF-8",
+            "queryTimeout": "10000"
+        }
+    }
+}
