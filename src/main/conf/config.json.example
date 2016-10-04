@@ -8,7 +8,16 @@
             "password": "",
             "database": "vertx",
             "charset": "UTF-8",
-            "queryTimeout": "10000"
+            "queryTimeout": 10000
+        }
+    },
+    "authentication": {
+        "google": {
+            "clientID": "",
+            "clientSecret": "",
+            "site": "",
+            "authorizationPath": "",
+            "tokenPath": ""
         }
     }
 }

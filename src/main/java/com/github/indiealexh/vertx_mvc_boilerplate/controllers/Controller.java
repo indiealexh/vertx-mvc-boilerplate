@@ -8,9 +8,11 @@ abstract class Controller {
 
     final Router controllerRouter;
     final AsyncSQLClient databaseClient;
+    final Vertx vertx;
 
     Controller(Vertx vertx, AsyncSQLClient databaseClient) {
         this.databaseClient = databaseClient;
+        this.vertx = vertx;
         this.controllerRouter = Router.router(vertx);
     }
 

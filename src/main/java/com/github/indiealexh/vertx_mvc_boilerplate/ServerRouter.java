@@ -1,5 +1,6 @@
 package com.github.indiealexh.vertx_mvc_boilerplate;
 
+import com.github.indiealexh.vertx_mvc_boilerplate.controllers.AuthController;
 import com.github.indiealexh.vertx_mvc_boilerplate.controllers.HelloController;
 import io.vertx.core.Vertx;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
@@ -24,5 +25,6 @@ class ServerRouter {
 
     private void buildRoutes() {
         this.router.mountSubRouter("/hello", new HelloController(this.vertx,this.databaseClient).getControllerRouter());
+        this.router.mountSubRouter("/auth", new AuthController(this.vertx,this.databaseClient).getControllerRouter());
     }
 }
