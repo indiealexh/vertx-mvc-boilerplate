@@ -23,6 +23,18 @@
       "config": {
         "scope": "profile email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login"
       }
-    }
+    },
+     "linkedin": {
+       "clientOptions": {
+         "clientID": "xxxxxxxxxxxxxx",
+         "clientSecret": "xxxxxxxxxxxxxxxx",
+         "site": "https://www.linkedin.com",
+         "authorizationPath": "/oauth/v2/authorization",
+         "tokenPath": "https://www.linkedin.com/oauth/v2/accessToken"
+       },
+       "config": {
+         "scope": "r_basicprofile r_emailaddress"
+       }
+     }
   }
 }
