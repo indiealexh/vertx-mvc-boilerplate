@@ -1,23 +1,28 @@
 {
-    "database": {
-        "default": {
-            "host": "localhost",
-            "port": 3306,
-            "maxPoolSize": 10,
-            "username": "root",
-            "password": "",
-            "database": "vertx",
-            "charset": "UTF-8",
-            "queryTimeout": 10000
-        }
-    },
-    "authentication": {
-        "google": {
-            "clientID": "",
-            "clientSecret": "",
-            "site": "",
-            "authorizationPath": "",
-            "tokenPath": ""
-        }
+  "database": {
+    "default": {
+      "host": "localhost",
+      "port": 3306,
+      "maxPoolSize": 10,
+      "username": "root",
+      "password": "",
+      "database": "vertx",
+      "charset": "UTF-8",
+      "queryTimeout": 10000
     }
+  },
+  "authentication": {
+    "google": {
+      "clientOptions": {
+        "clientID": "XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com",
+        "clientSecret": "XXXXXXXXXXXXXXXXXXXXXXXX",
+        "site": "https://accounts.google.com",
+        "authorizationPath": "/o/oauth2/v2/auth",
+        "tokenPath": "https://www.googleapis.com/oauth2/v3/token"
+      },
+      "config": {
+        "scope": "profile email https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login"
+      }
+    }
+  }
 }
