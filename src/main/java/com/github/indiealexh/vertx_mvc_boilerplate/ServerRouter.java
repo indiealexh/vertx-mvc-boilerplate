@@ -5,6 +5,10 @@ import com.github.indiealexh.vertx_mvc_boilerplate.controllers.HelloController;
 import io.vertx.core.Vertx;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.CookieHandler;
+import io.vertx.ext.web.handler.SessionHandler;
+import io.vertx.ext.web.sstore.LocalSessionStore;
+import io.vertx.ext.web.sstore.SessionStore;
 
 class ServerRouter {
 
@@ -16,11 +20,20 @@ class ServerRouter {
         this.vertx = vertx;
         this.databaseClient = databaseClient;
         this.router = Router.router(this.vertx);
+        this.addMiddleware();
         this.buildRoutes();
     }
 
     Router getRouter() {
         return this.router;
+    }
+
+    private void addMiddleware() {
+        CookieHandler cookieHandler = CookieHandler.create();
+        SessionStore sessionStore = LocalSessionStore.create(vertx);
+        SessionHandler sessionHandler = SessionHandler.create(sessionStore);
+        this.router.route().handler(cookieHandler);
+        this.router.route().handler(sessionHandler);
     }
 
     private void buildRoutes() {

@@ -1,9 +1,7 @@
 package com.github.indiealexh.vertx_mvc_boilerplate.controllers;
 
 import com.github.indiealexh.vertx_mvc_boilerplate.models.authhandlers.OAuthHandler;
-import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.web.RoutingContext;
 

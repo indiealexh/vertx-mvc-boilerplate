@@ -13,6 +13,8 @@ public class HelloController extends Controller {
     }
 
     private void helloWorld(RoutingContext rc) {
+        System.out.println((String) rc.session().get("name"));
+        rc.session().put("name","world");
         rc.response().end("Hello world!");
     }
 
