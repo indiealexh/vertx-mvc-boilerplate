@@ -8,9 +8,6 @@ import io.vertx.ext.web.RoutingContext;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-/**
- * Created by ahaslam on 04/10/16.
- */
 public class AuthController extends Controller {
     public AuthController(Vertx vertx, AsyncSQLClient databaseClient) {
         super(vertx, databaseClient);

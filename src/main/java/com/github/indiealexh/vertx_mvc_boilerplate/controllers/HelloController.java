@@ -1,5 +1,6 @@
 package com.github.indiealexh.vertx_mvc_boilerplate.controllers;
 
+import com.github.indiealexh.vertx_mvc_boilerplate.models.responses.Response;
 import io.vertx.core.Vertx;
 import io.vertx.ext.asyncsql.AsyncSQLClient;
 import io.vertx.ext.web.RoutingContext;
@@ -15,12 +16,16 @@ public class HelloController extends Controller {
     private void helloWorld(RoutingContext rc) {
         System.out.println((String) rc.session().get("name"));
         rc.session().put("name","world");
-        rc.response().end("Hello world!");
+        new Response(rc)
+                .setMessage("Hello world!")
+                .finish();
     }
 
     private void helloName(RoutingContext rc) {
         String name = rc.request().getParam("name");
-        rc.response().end(String.format("Hello %s", name));
+        new Response(rc)
+                .setMessage(String.format("Hello %s!", name))
+                .finish();
     }
 
 }

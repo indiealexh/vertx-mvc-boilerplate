@@ -1,5 +1,6 @@
 package com.github.indiealexh.vertx_mvc_boilerplate.models.authhandlers;
 
+import com.github.indiealexh.vertx_mvc_boilerplate.models.responses.Response;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
@@ -20,10 +21,15 @@ public class LinkedinOAuthHandler extends OAuthHandler {
         this.getoAuth2Auth().api(HttpMethod.GET, "https://api.linkedin.com/v1/people/~?format=json", apiConfig, response -> {
             if (response.failed()) {
                 System.out.println("OAuth Failed");
-                this.routingContext.response().setStatusCode(500).end("Could not login");
+                new Response(this.routingContext)
+                        .setStatus(500)
+                        .setMessage("Could not login")
+                        .finish();
             } else {
                 JsonObject user = response.result();
-                this.routingContext.response().end("Hello " + user.getString("firstName"));
+                new Response(this.routingContext)
+                        .setMessage("Hello " + user.getString("firstName"))
+                        .finish();
             }
             // TODO: Do something about storing the data or retrieving a user.
         });

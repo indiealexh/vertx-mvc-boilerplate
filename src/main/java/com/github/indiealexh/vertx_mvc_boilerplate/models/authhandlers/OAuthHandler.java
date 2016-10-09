@@ -1,5 +1,6 @@
 package com.github.indiealexh.vertx_mvc_boilerplate.models.authhandlers;
 
+import com.github.indiealexh.vertx_mvc_boilerplate.models.responses.Response;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.oauth2.AccessToken;
@@ -49,7 +50,10 @@ public abstract class OAuthHandler {
         this.getoAuth2Auth().getToken(this.getTokenConfig(code), accessTokenResponse -> {
             if (accessTokenResponse.failed()) {
                 System.out.println("Failed to obtain token");
-                routingContext.response().setStatusCode(500).end("Failed to obtain token");
+                new Response(this.routingContext)
+                        .setStatus(500)
+                        .setMessage("Failed to obtain token")
+                        .finish();
             } else {
                 AccessToken accessToken = accessTokenResponse.result();
                 this.getAuthenticatedUserDetails(accessToken);
