@@ -36,5 +36,10 @@
          "scope": "r_basicprofile r_emailaddress"
        }
      }
-  }
+  },
+    "ssl": {
+      "enabled": true,
+      "certpath": "/src/main/conf/cert.pem",
+      "keypath": "/src/main/conf/key.pem"
+    }
 }

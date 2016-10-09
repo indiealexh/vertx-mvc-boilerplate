@@ -23,8 +23,6 @@ public abstract class OAuthHandler {
         JsonObject clientOptions = this.vertx.getOrCreateContext().config().getJsonObject("authentication").getJsonObject(provider).getJsonObject("clientOptions");
         this.providerClientOptions = new OAuth2ClientOptions(clientOptions);
         this.providerConfig = this.vertx.getOrCreateContext().config().getJsonObject("authentication").getJsonObject(provider).getJsonObject("config");
-
-
     }
 
     public OAuth2ClientOptions getProviderClientOptions() {
@@ -39,11 +37,11 @@ public abstract class OAuthHandler {
     }
 
     public JsonObject getTokenConfig(String code) {
-        return new JsonObject().put("code",code).put("redirect_uri", "http://localhost:8080/auth/" + this.provider + "/callback");
+        return new JsonObject().put("code", code).put("redirect_uri", "https://localhost:8080/auth/" + this.provider + "/callback");
     }
 
     public String getAuthorizationUri() {
-        JsonObject uriConfig = new JsonObject().put("redirect_uri", "http://localhost:8080/auth/" + this.provider + "/callback").put("scope", this.providerConfig.getValue("scope"));
+        JsonObject uriConfig = new JsonObject().put("redirect_uri", "https://localhost:8080/auth/" + this.provider + "/callback").put("scope", this.providerConfig.getValue("scope"));
         return this.getoAuth2Auth().authorizeURL(uriConfig);
     }
 
@@ -51,6 +49,7 @@ public abstract class OAuthHandler {
         this.getoAuth2Auth().getToken(this.getTokenConfig(code), accessTokenResponse -> {
             if (accessTokenResponse.failed()) {
                 System.out.println("Failed to obtain token");
+                routingContext.response().setStatusCode(500).end("Failed to obtain token");
             } else {
                 AccessToken accessToken = accessTokenResponse.result();
                 this.getAuthenticatedUserDetails(accessToken);

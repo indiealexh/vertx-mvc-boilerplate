@@ -18,8 +18,13 @@ public class LinkedinOAuthHandler extends OAuthHandler {
     public void getAuthenticatedUserDetails(AccessToken accessToken) {
         JsonObject apiConfig = new JsonObject().put("access_token", accessToken.principal().getString("access_token"));
         this.getoAuth2Auth().api(HttpMethod.GET, "https://api.linkedin.com/v1/people/~?format=json", apiConfig, response -> {
-            JsonObject user = response.result();
-            this.routingContext.response().end("Hello " + user.getString("firstName"));
+            if (response.failed()) {
+                System.out.println("OAuth Failed");
+                this.routingContext.response().setStatusCode(500).end("Could not login");
+            } else {
+                JsonObject user = response.result();
+                this.routingContext.response().end("Hello " + user.getString("firstName"));
+            }
             // TODO: Do something about storing the data or retrieving a user.
         });
     }

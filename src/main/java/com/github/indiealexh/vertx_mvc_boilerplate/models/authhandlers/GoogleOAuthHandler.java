@@ -6,6 +6,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.oauth2.AccessToken;
 import io.vertx.ext.web.RoutingContext;
 
+import java.awt.*;
+
 public class GoogleOAuthHandler extends OAuthHandler {
 
     private static final String provider = "google";
@@ -18,8 +20,13 @@ public class GoogleOAuthHandler extends OAuthHandler {
     public void getAuthenticatedUserDetails(AccessToken accessToken) {
         JsonObject apiConfig = new JsonObject().put("access_token", accessToken.principal().getString("access_token"));
         this.getoAuth2Auth().api(HttpMethod.GET, "https://www.googleapis.com/oauth2/v3/userinfo", apiConfig, response -> {
-            JsonObject user = response.result();
-            this.routingContext.response().end("Hello " + user.getString("name"));
+            if (response.failed()) {
+                this.routingContext.response().setStatusCode(500).end("Could not login");
+            } else {
+                JsonObject user = response.result();
+                this.routingContext.response().end("Hello " + user.getString("name"));
+            }
+
             // TODO: Do something about storing the data or retrieving a user.
         });
     }
